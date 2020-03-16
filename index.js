@@ -46,11 +46,11 @@ module.exports = function (line, dist, units) {
 
   var travelled = 0;
   for(var i = 0; i < coords.length; i++) {
-    if(dist >= travelled && i === coords.length - 1) break;
+    if (dist >= travelled && i === coords.length - 1) break;
     else if(travelled >= dist) {
       var overshot = dist - travelled;
       if(!overshot) return point(coords[i]);
-      else{
+      else {
         var direction = bearing(point(coords[i]), point(coords[i - 1])) - 180;
         var interpolated = destination(point(coords[i]), overshot, direction, units);
         // complement elevation
@@ -61,7 +61,7 @@ module.exports = function (line, dist, units) {
         return interpolated;
       }
     }
-    else{
+    else {
       travelled += distance(point(coords[i]), point(coords[i + 1]), units);
     }
   }
