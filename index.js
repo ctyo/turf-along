@@ -51,7 +51,7 @@ module.exports = function (line, dist, units) {
       var overshot = dist - travelled;
       if(!overshot) return point(coords[i]);
       else {
-        var direction = bearing(point(coords[i]), point(coords[i - 1])) - 180;
+        var direction = bearing(point(coords[i]), point(coords[i-1])) - 180;
         var interpolated = destination(point(coords[i]), overshot, direction, units);
         // complement elevation
         if(coords[i].length > 2) {
@@ -62,7 +62,7 @@ module.exports = function (line, dist, units) {
       }
     }
     else {
-      travelled += distance(point(coords[i]), point(coords[i + 1]), units);
+      travelled += distance(point(coords[i]), point(coords[i+1]), units);
     }
   }
   return point(coords[coords.length - 1]);
