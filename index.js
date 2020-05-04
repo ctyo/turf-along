@@ -56,7 +56,11 @@ module.exports = function (line, dist, units) {
         // complement elevation
         if(coords[i].length > 2) {
           var diff = coords[i][2] - coords[i - 1][2];
-          interpolated.geometry.coordinates[2] = coords[i][2] + (overshot / direction) * diff;
+          if (diff !== 0) {
+            interpolated.geometry.coordinates[2] = coords[i][2] + (overshot / direction) * diff;
+          } else {
+            interpolated.geometry.coordinates[2] = coords[i][2];
+          }
         }
         return interpolated;
       }
