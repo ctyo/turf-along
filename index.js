@@ -53,6 +53,15 @@ module.exports = function (line, dist, units) {
       else {
         var direction = bearing(point(coords[i]), point(coords[i-1])) - 180;
         var interpolated = destination(point(coords[i]), overshot, direction, units);
+        // complement elevation
+        if(coords[i].length > 2) {
+          var diff = coords[i][2] - coords[i - 1][2];
+          if (diff !== 0 && coords[i][2] !== 0) {
+            interpolated.geometry.coordinates[2] = coords[i][2] * (1 + diff / coords[i][2]);
+          } else {
+            interpolated.geometry.coordinates[2] = coords[i][2];
+          }
+        }
         return interpolated;
       }
     }
