@@ -26,5 +26,17 @@ test('turf-along', function (t) {
     t.equal(fc.features[7].geometry.coordinates[0], pt8.geometry.coordinates[0]);
     t.equal(fc.features[7].geometry.coordinates[1], pt8.geometry.coordinates[1]);
 
+
+
+	var et1 = along(line, 1, 'kilometers');
+	var et2 = along(line, 1.4, 'kilometers');
+	var et3 = along(line, 5, 'kilometers');
+	featurecollection([et1, et2, et3]).features.forEach(function (f) {
+		t.ok(f);
+		t.equal(f.type, 'Feature');
+		t.equal(f.geometry.type, 'Point');
+		t.equal(f.geometry.coordinates.length, 3);
+	});
+
 	t.end();
 });
